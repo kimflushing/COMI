@@ -23,7 +23,7 @@
       --radius2:14px;
     }
 
-    [data-theme="light"]{
+    body[data-theme="light"]{
       --bg:#eff4fb;
       --bg2:#f5f8fd;
       --panel:#ffffff;
@@ -43,22 +43,13 @@
     ::-webkit-scrollbar-thumb{background:color-mix(in srgb, var(--muted) 35%, transparent);border-radius:999px}
     ::-webkit-scrollbar-track{background:transparent}
 
-    .app{
-      display:grid;
-      grid-template-columns:270px 1fr;
-      min-height:100vh;
-    }
-
+    .app{display:grid;grid-template-columns:270px 1fr;min-height:100vh}
     .sidebar{
-      position:sticky;
-      top:0;
-      height:100vh;
-      overflow:auto;
+      position:sticky;top:0;height:100vh;overflow:auto;
       padding:20px 16px;
       background:linear-gradient(180deg,var(--panel),color-mix(in srgb, var(--panel) 85%, #000 15%));
       border-right:1px solid var(--line);
     }
-
     .brand{
       display:flex;align-items:center;gap:12px;
       padding:8px 8px 18px;margin-bottom:16px;
@@ -66,46 +57,34 @@
     }
     .badge{
       width:44px;height:44px;border-radius:14px;
-      display:grid;place-items:center;
-      color:white;font-weight:800;
+      display:grid;place-items:center;color:white;font-weight:800;
       background:linear-gradient(135deg,var(--accent),var(--accent2));
       box-shadow:var(--shadow);
       user-select:none;
     }
     .brand h1{margin:0;font-size:18px;line-height:1.1}
     .brand p{margin:4px 0 0;color:var(--muted);font-size:12px}
-
     .nav{display:grid;gap:8px;margin-top:10px}
     .nav button{
-      border:1px solid transparent;
-      background:transparent;
-      color:var(--text);
-      padding:12px 14px;
-      border-radius:14px;
-      display:flex;align-items:center;gap:10px;
-      text-align:left;
-      transition:.16s ease;
+      border:1px solid transparent;background:transparent;color:var(--text);
+      padding:12px 14px;border-radius:14px;display:flex;align-items:center;gap:10px;
+      text-align:left;transition:.16s ease
     }
     .nav button:hover,.nav button.active{
       background:color-mix(in srgb, var(--accent) 14%, transparent);
       border-color:color-mix(in srgb, var(--accent) 22%, transparent);
-      transform:translateY(-1px);
+      transform:translateY(-1px)
     }
-
     .side-card{
-      margin-top:16px;
-      padding:14px;
-      border:1px solid var(--line);
-      border-radius:16px;
-      background:var(--panel2);
-      box-shadow:var(--shadow);
+      margin-top:16px;padding:14px;border:1px solid var(--line);border-radius:16px;
+      background:var(--panel2);box-shadow:var(--shadow)
     }
     .side-card h3{margin:0 0 10px;font-size:14px}
     .mini-lines{display:grid;gap:7px;color:var(--muted);font-size:13px}
     .accent-row{display:flex;flex-wrap:wrap;gap:8px}
     .color-btn{
       width:28px;height:28px;border-radius:999px;border:2px solid rgba(255,255,255,.18);
-      box-shadow:0 2px 8px rgba(0,0,0,.16);
+      box-shadow:0 2px 8px rgba(0,0,0,.16)
     }
     .color-btn.active{outline:2px solid var(--text);outline-offset:2px}
 
@@ -116,66 +95,40 @@
     .top-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end;flex:1}
     .search{
       min-width:min(420px,100%);
-      flex:1;
-      display:flex;align-items:center;gap:10px;
-      padding:12px 14px;
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:14px;
-      box-shadow:var(--shadow);
+      flex:1;display:flex;align-items:center;gap:10px;
+      padding:12px 14px;background:var(--panel);border:1px solid var(--line);
+      border-radius:14px;box-shadow:var(--shadow)
     }
     .search input{border:none;outline:none;background:transparent;color:var(--text);width:100%}
     .btn{
-      border:1px solid var(--line);
-      background:var(--panel);
-      color:var(--text);
-      padding:12px 14px;
-      border-radius:14px;
-      box-shadow:var(--shadow);
-      display:inline-flex;align-items:center;gap:8px;
-      transition:.16s ease;
-      white-space:nowrap;
+      border:1px solid var(--line);background:var(--panel);color:var(--text);
+      padding:12px 14px;border-radius:14px;box-shadow:var(--shadow);
+      display:inline-flex;align-items:center;gap:8px;transition:.16s ease;white-space:nowrap
     }
     .btn:hover{transform:translateY(-1px);border-color:color-mix(in srgb, var(--accent) 35%, var(--line))}
     .btn.primary{
       background:linear-gradient(135deg,var(--accent),var(--accent2));
-      border-color:transparent;
-      color:#fff;
-      font-weight:800;
+      border-color:transparent;color:#fff;font-weight:800
     }
 
     .stats{
-      display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:14px;
-      margin-bottom:16px;
+      display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:16px
     }
     .stat-card{
       background:linear-gradient(180deg,var(--panel),color-mix(in srgb, var(--panel) 88%, #000 12%));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:18px;
-      box-shadow:var(--shadow);
+      border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)
     }
     .stat-card p{margin:0}
     .stat-label{font-size:13px;color:var(--muted);margin-bottom:10px}
     .stat-value{font-size:28px;font-weight:850;letter-spacing:-.03em}
     .stat-sub{margin-top:10px;color:var(--muted);font-size:13px}
 
-    .content-grid{
-      display:grid;
-      grid-template-columns:1.55fr .95fr;
-      gap:16px;
-      align-items:start;
-    }
+    .content-grid{display:grid;grid-template-columns:1.55fr .95fr;gap:16px;align-items:start}
     .stack{display:grid;gap:16px}
 
     .card{
       background:linear-gradient(180deg,var(--panel),color-mix(in srgb, var(--panel) 88%, #000 12%));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:18px;
-      box-shadow:var(--shadow);
+      border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)
     }
     .card h3{margin:0;font-size:18px}
     .section-head{
@@ -183,46 +136,27 @@
     }
     .filters{display:flex;gap:10px;flex-wrap:wrap}
     .filters select,.filters input,.filters textarea{
-      background:var(--panel2);
-      color:var(--text);
-      border:1px solid var(--line);
-      border-radius:12px;
-      padding:10px 12px;
-      outline:none;
+      background:var(--panel2);color:var(--text);border:1px solid var(--line);
+      border-radius:12px;padding:10px 12px;outline:none
     }
 
     .table-wrap{
-      overflow:auto;
-      border:1px solid var(--line);
-      border-radius:16px;
-      background:var(--panel);
+      overflow:auto;border:1px solid var(--line);border-radius:16px;background:var(--panel)
     }
-    table{
-      width:100%;
-      min-width:1040px;
-      border-collapse:collapse;
-    }
+    table{width:100%;min-width:1040px;border-collapse:collapse}
     thead th{
-      position:sticky;top:0;z-index:1;
-      background:color-mix(in srgb, var(--panel) 84%, #fff 2%);
-      color:var(--muted);
-      text-align:left;
-      font-size:13px;
-      padding:14px;
-      border-bottom:1px solid var(--line);
+      position:sticky;top:0;z-index:1;background:color-mix(in srgb, var(--panel) 84%, #fff 2%);
+      color:var(--muted);text-align:left;font-size:13px;padding:14px;border-bottom:1px solid var(--line)
     }
     tbody td{
-      padding:14px;
-      border-bottom:1px solid color-mix(in srgb, var(--line) 72%, transparent);
-      font-size:14px;
-      vertical-align:top;
+      padding:14px;border-bottom:1px solid color-mix(in srgb, var(--line) 72%, transparent);
+      font-size:14px;vertical-align:top
     }
     tbody tr:hover{background:color-mix(in srgb, var(--accent) 8%, transparent)}
     .muted{color:var(--muted)}
     .pill{
       display:inline-flex;align-items:center;gap:6px;
-      padding:6px 10px;border-radius:999px;
-      font-size:12px;font-weight:700;white-space:nowrap
+      padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap
     }
     .pill.gray{background:color-mix(in srgb, var(--muted) 14%, transparent)}
     .pill.blue{background:color-mix(in srgb, var(--accent) 18%, transparent)}
@@ -230,70 +164,37 @@
     .pill.yellow{background:color-mix(in srgb, var(--warn) 20%, transparent)}
     .pill.red{background:color-mix(in srgb, var(--bad) 18%, transparent)}
     .star{
-      font-size:18px;
-      background:transparent;
-      border:none;
-      color:color-mix(in srgb, var(--warn) 95%, #fff 5%);
-      padding:0;
-      line-height:1;
+      font-size:18px;background:transparent;border:none;color:color-mix(in srgb, var(--warn) 95%, #fff 5%);
+      padding:0;line-height:1
     }
-    .actions{
-      display:flex;gap:8px;flex-wrap:wrap
-    }
+    .actions{display:flex;gap:8px;flex-wrap:wrap}
     .icon-btn{
-      border:1px solid var(--line);
-      background:var(--panel2);
-      color:var(--text);
-      border-radius:10px;
-      padding:8px 10px;
+      border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 10px
     }
-
     .progress-row{min-width:140px}
     .progress-meta{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:var(--muted);margin-bottom:6px}
     .progress{
       width:100%;height:9px;border-radius:999px;background:color-mix(in srgb, var(--muted) 18%, transparent);overflow:hidden
     }
     .progress span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
-    .empty{
-      padding:28px;
-      text-align:center;
-      color:var(--muted);
-    }
+    .empty{padding:28px;text-align:center;color:var(--muted)}
 
     .board{
-      display:grid;
-      grid-template-columns:repeat(7,minmax(180px,1fr));
-      gap:12px;
-      overflow:auto;
-      padding-bottom:4px;
+      display:grid;grid-template-columns:repeat(7,minmax(180px,1fr));gap:12px;overflow:auto;padding-bottom:4px
     }
     .column{
-      min-height:220px;
-      border:1px solid var(--line);
-      border-radius:16px;
-      background:var(--panel);
-      overflow:hidden;
+      min-height:220px;border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden
     }
     .col-head{
-      padding:12px 12px 10px;
-      border-bottom:1px solid var(--line);
-      display:flex;justify-content:space-between;align-items:center;gap:8px
+      padding:12px 12px 10px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px
     }
     .col-head strong{font-size:14px}
     .dropzone{
-      min-height:180px;
-      padding:12px;
-      display:grid;
-      gap:10px;
+      min-height:180px;padding:12px;display:grid;gap:10px
     }
     .dropzone.dragover{background:color-mix(in srgb, var(--accent) 10%, transparent)}
     .mini-card{
-      border:1px solid var(--line);
-      border-radius:14px;
-      background:var(--panel2);
-      padding:12px;
-      cursor:pointer;
-      user-select:none;
+      border:1px solid var(--line);border-radius:14px;background:var(--panel2);padding:12px;cursor:pointer;user-select:none
     }
     .mini-card[draggable="true"]{cursor:grab}
     .mini-card:active{cursor:grabbing}
@@ -303,102 +204,57 @@
     .mini-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
 
     .calendar-head{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
-    .calendar{
-      display:grid;
-      grid-template-columns:repeat(7,minmax(0,1fr));
-      gap:8px;
-    }
-    .day-head{
-      text-align:center;
-      color:var(--muted);
-      font-size:12px;
-      padding:4px 0;
-    }
+    .calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+    .day-head{text-align:center;color:var(--muted);font-size:12px;padding:4px 0}
     .day{
-      min-height:96px;
-      border:1px solid var(--line);
-      border-radius:14px;
-      background:var(--panel);
-      padding:8px;
-      overflow:hidden;
+      min-height:96px;border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:8px;overflow:hidden
     }
     .day.empty{opacity:.35;background:transparent;border-style:dashed}
     .day.today{outline:2px solid color-mix(in srgb, var(--accent) 70%, transparent)}
     .day-num{font-size:13px;font-weight:800;margin-bottom:6px}
     .event{
-      display:block;
-      margin-top:4px;
-      padding:4px 6px;
-      border-radius:8px;
-      font-size:11px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      display:block;margin-top:4px;padding:4px 6px;border-radius:8px;font-size:11px;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis
     }
     .event.red{background:color-mix(in srgb, var(--bad) 18%, transparent)}
     .event.yellow{background:color-mix(in srgb, var(--warn) 20%, transparent)}
     .event.green{background:color-mix(in srgb, var(--good) 16%, transparent)}
     .event.blue{background:color-mix(in srgb, var(--accent) 18%, transparent)}
 
-    .summary-grid{
-      display:grid;
-      gap:12px;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-    }
+    .summary-grid{display:grid;gap:12px;grid-template-columns:repeat(3,minmax(0,1fr))}
     .summary-box{
-      border:1px solid var(--line);
-      background:var(--panel2);
-      border-radius:16px;
-      padding:14px;
+      border:1px solid var(--line);background:var(--panel2);border-radius:16px;padding:14px
     }
     .summary-box h4{margin:0 0 8px;font-size:14px}
     .summary-box p{margin:0;color:var(--muted);font-size:13px}
     .bar-list{display:grid;gap:10px}
     .bar-item{display:grid;gap:6px}
     .bar-label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
-    .bar{
-      height:12px;border-radius:999px;background:color-mix(in srgb, var(--muted) 15%, transparent);overflow:hidden
-    }
+    .bar{height:12px;border-radius:999px;background:color-mix(in srgb, var(--muted) 15%, transparent);overflow:hidden}
     .bar > span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
     .settings-grid{display:grid;gap:14px}
     .type-list{display:grid;gap:10px}
     .type-row{
-      display:grid;
-      grid-template-columns:1.1fr .6fr auto;
-      gap:8px;
-      align-items:center;
+      display:grid;grid-template-columns:1.1fr .6fr auto;gap:8px;align-items:center
     }
     .type-row input{
-      width:100%;
-      padding:10px 12px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:var(--panel2);
-      color:var(--text);
-      outline:none;
+      width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--panel2);color:var(--text);outline:none
     }
     .note{color:var(--muted);font-size:13px;line-height:1.6}
 
     .detail-backdrop,.modal-backdrop{
-      position:fixed;inset:0;background:rgba(0,0,0,.58);
-      display:none;z-index:50;
+      position:fixed;inset:0;background:rgba(0,0,0,.58);display:none;z-index:50
     }
     .detail-backdrop.show,.modal-backdrop.show{display:block}
+
     .detail-panel{
       position:fixed;top:0;right:0;height:100vh;width:min(460px,100%);
-      background:var(--panel);
-      border-left:1px solid var(--line);
-      box-shadow:var(--shadow);
-      transform:translateX(100%);
-      transition:.22s ease;
-      z-index:60;
-      display:flex;
-      flex-direction:column;
+      background:var(--panel);border-left:1px solid var(--line);box-shadow:var(--shadow);
+      transform:translateX(100%);transition:.22s ease;z-index:60;display:flex;flex-direction:column
     }
     .detail-panel.show{transform:translateX(0)}
     .detail-head{
-      padding:16px 16px 14px;
-      border-bottom:1px solid var(--line);
+      padding:16px 16px 14px;border-bottom:1px solid var(--line);
       display:flex;justify-content:space-between;align-items:flex-start;gap:12px
     }
     .detail-head h3{margin:0;font-size:18px}
@@ -406,20 +262,14 @@
     .detail-body{padding:16px;overflow:auto;display:grid;gap:14px}
     .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .detail-item{
-      border:1px solid var(--line);
-      background:var(--panel2);
-      border-radius:14px;
-      padding:12px;
+      border:1px solid var(--line);background:var(--panel2);border-radius:14px;padding:12px
     }
     .detail-item .k{color:var(--muted);font-size:12px;margin-bottom:6px}
     .detail-item .v{font-weight:700}
     .detail-actions{display:flex;flex-wrap:wrap;gap:8px}
     .detail-actions .btn,.detail-actions .icon-btn{box-shadow:none}
     .detail-section{
-      border:1px solid var(--line);
-      background:var(--panel2);
-      border-radius:16px;
-      padding:14px;
+      border:1px solid var(--line);background:var(--panel2);border-radius:16px;padding:14px
     }
     .detail-section h4{margin:0 0 10px;font-size:14px}
     .checklist{display:grid;gap:8px}
@@ -428,48 +278,28 @@
     .attach-list{display:grid;gap:8px}
     .attach{
       display:flex;justify-content:space-between;gap:10px;align-items:center;
-      border:1px solid var(--line);
-      background:var(--panel);
-      border-radius:12px;
-      padding:10px;
+      border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:10px
     }
     .attach img{
       width:42px;height:42px;border-radius:10px;object-fit:cover;border:1px solid var(--line)
     }
     .inline-input,.inline-textarea{
-      width:100%;
-      border:1px solid var(--line);
-      background:var(--panel);
-      color:var(--text);
-      border-radius:12px;
-      padding:10px 12px;
-      outline:none;
+      width:100%;border:1px solid var(--line);background:var(--panel);color:var(--text);
+      border-radius:12px;padding:10px 12px;outline:none
     }
     .inline-textarea{resize:vertical;min-height:96px}
-    .timer{
-      font-size:26px;
-      font-weight:900;
-      letter-spacing:-.03em;
-    }
+    .timer{font-size:26px;font-weight:900;letter-spacing:-.03em}
 
     .modal{
       width:min(960px,calc(100% - 24px));
-      background:var(--panel);
-      border:1px solid var(--line);
-      border-radius:22px;
-      box-shadow:var(--shadow);
-      position:fixed;inset:50% auto auto 50%;
-      transform:translate(-50%,-50%);
-      z-index:70;
-      display:none;
-      overflow:hidden;
-      max-height:min(92vh,980px);
+      background:var(--panel);border:1px solid var(--line);border-radius:22px;
+      box-shadow:var(--shadow);position:fixed;inset:50% auto auto 50%;
+      transform:translate(-50%,-50%);z-index:70;display:none;overflow:hidden;max-height:min(92vh,980px)
     }
     .modal.show{display:block}
     .modal-head{
       display:flex;justify-content:space-between;align-items:flex-start;gap:12px;
-      padding:18px 18px 14px;
-      border-bottom:1px solid var(--line);
+      padding:18px 18px 14px;border-bottom:1px solid var(--line)
     }
     .modal-head h3{margin:0;font-size:18px}
     .modal-head p{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.5}
@@ -479,25 +309,11 @@
     .field.full{grid-column:1/-1}
     .field label{font-size:13px;color:var(--muted)}
     .field input,.field select,.field textarea{
-      width:100%;
-      background:var(--panel2);
-      color:var(--text);
-      border:1px solid var(--line);
-      border-radius:12px;
-      padding:11px 12px;
-      outline:none;
-      resize:vertical;
+      width:100%;background:var(--panel2);color:var(--text);border:1px solid var(--line);
+      border-radius:12px;padding:11px 12px;outline:none;resize:vertical
     }
     .field textarea{min-height:110px}
-    .modal-foot{
-      display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;
-      padding:0 18px 18px;
-    }
-    .split{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-    }
+    .modal-foot{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;padding:0 18px 18px}
     .hidden{display:none !important}
 
     @media (max-width:1200px){
@@ -512,12 +328,14 @@
       .main{padding:14px}
       .stats{grid-template-columns:1fr}
       .search{min-width:100%}
-      .form-grid,.split{grid-template-columns:1fr}
+      .form-grid{grid-template-columns:1fr}
       .board{grid-template-columns:repeat(1,minmax(0,1fr))}
       .calendar{gap:6px}
       .day{min-height:82px}
       .detail-panel{width:100%}
       .topbar h2{font-size:24px}
+      .detail-grid{grid-template-columns:1fr}
+      .type-row{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -570,13 +388,13 @@
           <div class="search">
             🔍 <input id="searchInput" type="text" placeholder="닉네임, 플랫폼, 타입, 메모, 태그 검색">
           </div>
-          <button class="btn primary" id="addBtn">＋ 새 의뢰</button>
-          <button class="btn" id="exportBtn">⬇ 백업</button>
+          <button class="btn primary" id="addBtn" type="button">＋ 새 의뢰</button>
+          <button class="btn" id="exportBtn" type="button">⬇ 백업</button>
           <label class="btn" style="cursor:pointer">
             ⬆ 복원
             <input type="file" id="importInput" accept="application/json" class="hidden">
           </label>
-          <button class="btn" id="resetBtn">샘플 복원</button>
+          <button class="btn" id="resetBtn" type="button">샘플 복원</button>
         </div>
       </div>
 
@@ -669,9 +487,9 @@
             <div class="calendar-head">
               <h3>캘린더</h3>
               <div class="filters">
-                <button class="btn" id="prevMonthBtn">← 이전 달</button>
-                <button class="btn" id="todayMonthBtn">오늘</button>
-                <button class="btn" id="nextMonthBtn">다음 달 →</button>
+                <button class="btn" id="prevMonthBtn" type="button">← 이전 달</button>
+                <button class="btn" id="todayMonthBtn" type="button">오늘</button>
+                <button class="btn" id="nextMonthBtn" type="button">다음 달 →</button>
               </div>
             </div>
             <div class="note" id="calendarTitle" style="margin-bottom:12px"></div>
@@ -719,7 +537,7 @@
           <div class="card" id="settingsSection">
             <div class="section-head">
               <h3>설정 / 타입 관리</h3>
-              <button class="btn primary" id="addTypeBtn">＋ 타입 추가</button>
+              <button class="btn primary" id="addTypeBtn" type="button">＋ 타입 추가</button>
             </div>
 
             <div class="settings-grid">
@@ -731,15 +549,15 @@
               <div class="detail-section">
                 <h4>빠른 기능</h4>
                 <div class="actions">
-                  <button class="btn" id="exportBtn2">백업 저장</button>
+                  <button class="btn" id="exportBtn2" type="button">백업 저장</button>
                   <label class="btn" style="cursor:pointer">
                     백업 불러오기
                     <input type="file" id="importInput2" accept="application/json" class="hidden">
                   </label>
-                  <button class="btn" id="clearBtn">전체 초기화</button>
+                  <button class="btn" id="clearBtn" type="button">전체 초기화</button>
                 </div>
                 <div class="note" style="margin-top:10px">
-                  크레페 주문 내용을 복붙하면 자동으로 채워지는 기능이 들어가 있어.
+                  크레페 주문 내용을 붙여 넣으면 자동으로 채워지는 기능이 들어가 있어.
                 </div>
               </div>
             </div>
@@ -756,9 +574,8 @@
         <h3 id="detailTitle">상세</h3>
         <div class="small" id="detailSub">의뢰를 선택해봐.</div>
       </div>
-      <button class="icon-btn" id="closeDetailBtn">✕</button>
+      <button class="icon-btn" id="closeDetailBtn" type="button">✕</button>
     </div>
-
     <div class="detail-body" id="detailBody">
       <div class="empty">왼쪽 목록에서 항목을 누르면 상세가 열려.</div>
     </div>
@@ -771,7 +588,7 @@
         <h3 id="modalTitle">새 의뢰 추가</h3>
         <p>크레페 주문 내용을 붙여 넣고 자동 입력할 수 있어.</p>
       </div>
-      <button class="icon-btn" id="closeModalBtn">✕</button>
+      <button class="icon-btn" id="closeModalBtn" type="button">✕</button>
     </div>
 
     <div class="modal-body">
@@ -779,8 +596,8 @@
         <h4>크레페 / 주문 내용 붙여넣기</h4>
         <textarea id="rawPaste" class="inline-textarea" placeholder="예)&#10;닉네임: 홍길동&#10;플랫폼: 크레페&#10;타입: 반신&#10;가격: 50000&#10;예약금: 25000&#10;마감일: 2026-11-15&#10;상태: 예약"></textarea>
         <div class="actions" style="margin-top:10px">
-          <button class="btn" id="parseBtn">자동 입력</button>
-          <button class="btn" id="clearPasteBtn">붙여넣기 지우기</button>
+          <button class="btn" id="parseBtn" type="button">자동 입력</button>
+          <button class="btn" id="clearPasteBtn" type="button">붙여넣기 지우기</button>
         </div>
       </div>
 
@@ -877,22 +694,10 @@
   </div>
 
   <script>
-    const STORAGE_KEY = "commission-manager-v3";
-    const THEME_KEY = "commission-manager-theme-v3";
-    const ACCENT_KEY = "commission-manager-accent-v3";
-
+    const STORAGE_KEY = "commission-manager-v4";
     const STATUS_ORDER = ["문의","예약","입금 확인","작업 중","컨펌","전달 완료","완료"];
-    const STATUS_COLORS = {
-      "문의":"red",
-      "예약":"gray",
-      "입금 확인":"yellow",
-      "작업 중":"blue",
-      "컨펌":"blue",
-      "전달 완료":"green",
-      "완료":"green"
-    };
+    const STATUS_COLORS = { 문의:"red", 예약:"gray", "입금 확인":"yellow", "작업 중":"blue", 컨펌:"blue", "전달 완료":"green", 완료:"green" };
     const ACCENTS = ["#6ea8ff","#8d7cff","#ff7ab8","#4fe08f","#ffd35e","#ff6b7a"];
-
     const defaultTypes = [
       { name:"SD", price:25000 },
       { name:"흉상", price:30000 },
@@ -900,6 +705,32 @@
       { name:"전신", price:90000 },
       { name:"커스텀", price:0 }
     ];
+
+    function uid(){
+      return (crypto && crypto.randomUUID) ? crypto.randomUUID() : `id_${Math.random().toString(36).slice(2)}_${Date.now()}`;
+    }
+    function offsetDate(days){
+      const d = new Date();
+      d.setDate(d.getDate() + days);
+      return d.toISOString().slice(0,10);
+    }
+    function dayDiff(dateStr){
+      if(!dateStr) return null;
+      const a = new Date(dateStr + "T00:00:00");
+      const b = new Date();
+      b.setHours(0,0,0,0);
+      return Math.round((a - b) / 86400000);
+    }
+    function progressByStatus(status){
+      const idx = STATUS_ORDER.indexOf(status);
+      return idx < 0 ? 0 : Math.round(((idx + 1) / STATUS_ORDER.length) * 100);
+    }
+    function balanceOf(item){
+      return Math.max(0, Number(item.price || 0) - Number(item.deposit || 0));
+    }
+    function isDone(item){ return ["전달 완료","완료"].includes(item.status); }
+    function isWorking(item){ return ["입금 확인","작업 중","컨펌"].includes(item.status); }
+    function isReserved(item){ return ["문의","예약"].includes(item.status); }
 
     const sampleData = [
       {
@@ -977,19 +808,14 @@
 
     const state = {
       data: [],
-      settings: {
-        theme:"dark",
-        accent:"#6ea8ff",
-        types:[...defaultTypes]
-      },
+      settings: { theme:"dark", accent:"#6ea8ff", types:[...defaultTypes] },
       search:"",
       statusFilter:"",
       platformFilter:"",
       sortFilter:"dueAsc",
       editingId:null,
       selectedId:null,
-      monthOffset:0,
-      activeTimerId:null
+      monthOffset:0
     };
 
     const $ = (id) => document.getElementById(id);
@@ -998,79 +824,39 @@
     const dateYMD = (d) => d.toISOString().slice(0,10);
     const clone = (v) => JSON.parse(JSON.stringify(v));
     const escapeHtml = (str) => String(str ?? "")
-      .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#39;");
+      .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;").replaceAll("'","&#39;");
 
-    function uid(){
-      return (crypto && crypto.randomUUID) ? crypto.randomUUID() : `id_${Math.random().toString(36).slice(2)}_${Date.now()}`;
-    }
-    function offsetDate(days){
-      const d = new Date();
-      d.setDate(d.getDate()+days);
-      return dateYMD(d);
-    }
-    function dayDiff(dateStr){
-      if(!dateStr) return null;
-      const a = new Date(dateStr + "T00:00:00");
-      const b = new Date();
-      b.setHours(0,0,0,0);
-      return Math.round((a - b) / 86400000);
-    }
-    function progressByStatus(status){
-      const idx = STATUS_ORDER.indexOf(status);
-      if(idx < 0) return 0;
-      return Math.round(((idx + 1) / STATUS_ORDER.length) * 100);
-    }
-    function balanceOf(item){
-      return Math.max(0, Number(item.price || 0) - Number(item.deposit || 0));
-    }
-    function isDone(item){
-      return ["전달 완료","완료"].includes(item.status);
-    }
-    function isWorking(item){
-      return ["입금 확인","작업 중","컨펌"].includes(item.status);
-    }
-    function isReserved(item){
-      return ["문의","예약"].includes(item.status);
-    }
-    function statusClass(status){
-      return STATUS_COLORS[status] || "gray";
-    }
-
-    function getStorage(){
+    function loadData(){
       try{
         const raw = localStorage.getItem(STORAGE_KEY);
-        if(raw) return JSON.parse(raw);
+        if(raw){
+          const saved = JSON.parse(raw);
+          if(Array.isArray(saved.data)) state.data = saved.data;
+          if(saved.settings){
+            state.settings.theme = saved.settings.theme || "dark";
+            state.settings.accent = saved.settings.accent || "#6ea8ff";
+            state.settings.types = Array.isArray(saved.settings.types) && saved.settings.types.length ? saved.settings.types : [...defaultTypes];
+          }
+          return;
+        }
       }catch(e){}
-      return null;
+      state.data = clone(sampleData);
+      saveData();
     }
-    function saveStorage(){
+
+    function saveData(){
       localStorage.setItem(STORAGE_KEY, JSON.stringify({
         data: state.data,
         settings: state.settings
       }));
-      localStorage.setItem(THEME_KEY, state.settings.theme);
-      localStorage.setItem(ACCENT_KEY, state.settings.accent);
-    }
-    function loadStorage(){
-      const saved = getStorage();
-      if(saved && Array.isArray(saved.data)){
-        state.data = saved.data;
-        state.settings = {
-          theme: saved.settings?.theme || "dark",
-          accent: saved.settings?.accent || "#6ea8ff",
-          types: Array.isArray(saved.settings?.types) && saved.settings.types.length ? saved.settings.types : [...defaultTypes]
-        };
-      }else{
-        state.data = clone(sampleData);
-        state.settings = { theme:"dark", accent:"#6ea8ff", types:[...defaultTypes] };
-        saveStorage();
-      }
     }
 
     function applyTheme(){
       document.body.dataset.theme = state.settings.theme;
       $("themeToggle").checked = state.settings.theme === "light";
       document.documentElement.style.setProperty("--accent", state.settings.accent);
+      loadAccentButtons();
     }
 
     function loadAccentButtons(){
@@ -1079,13 +865,13 @@
       ACCENTS.forEach(c => {
         const b = document.createElement("button");
         b.className = "color-btn" + (state.settings.accent === c ? " active" : "");
+        b.type = "button";
         b.style.background = c;
         b.title = c;
         b.addEventListener("click", () => {
           state.settings.accent = c;
-          saveStorage();
+          saveData();
           applyTheme();
-          loadAccentButtons();
           renderAll();
         });
         wrap.appendChild(b);
@@ -1098,32 +884,19 @@
 
     function filteredData(){
       let data = [...state.data];
-
       const q = state.search.trim().toLowerCase();
       if(q){
-        data = data.filter(x => [
-          x.clientName, x.platform, x.type, x.customTypeName, x.status, x.tag, x.memo
-        ].join(" ").toLowerCase().includes(q));
+        data = data.filter(x => [x.clientName,x.platform,x.type,x.customTypeName,x.status,x.tag,x.memo].join(" ").toLowerCase().includes(q));
       }
       if(state.statusFilter) data = data.filter(x => x.status === state.statusFilter);
       if(state.platformFilter) data = data.filter(x => x.platform === state.platformFilter);
 
       switch(state.sortFilter){
-        case "dueAsc":
-          data.sort((a,b) => (a.dueDate || "9999-12-31").localeCompare(b.dueDate || "9999-12-31"));
-          break;
-        case "dueDesc":
-          data.sort((a,b) => (b.dueDate || "").localeCompare(a.dueDate || ""));
-          break;
-        case "priceDesc":
-          data.sort((a,b) => (Number(b.price)||0) - (Number(a.price)||0));
-          break;
-        case "priceAsc":
-          data.sort((a,b) => (Number(a.price)||0) - (Number(b.price)||0));
-          break;
-        case "newDesc":
-          data.sort((a,b) => (Number(b.createdAt)||0) - (Number(a.createdAt)||0));
-          break;
+        case "dueAsc": data.sort((a,b) => (a.dueDate || "9999-12-31").localeCompare(b.dueDate || "9999-12-31")); break;
+        case "dueDesc": data.sort((a,b) => (b.dueDate || "").localeCompare(a.dueDate || "")); break;
+        case "priceDesc": data.sort((a,b) => (Number(b.price)||0) - (Number(a.price)||0)); break;
+        case "priceAsc": data.sort((a,b) => (Number(a.price)||0) - (Number(b.price)||0)); break;
+        case "newDesc": data.sort((a,b) => (Number(b.createdAt)||0) - (Number(a.createdAt)||0)); break;
       }
       return data;
     }
@@ -1135,8 +908,7 @@
       return state.data
         .filter(item => {
           const d = item.dueDate ? new Date(item.dueDate + "T00:00:00") : null;
-          if(!d) return false;
-          return d.getFullYear() === y && d.getMonth() === m;
+          return d && d.getFullYear() === y && d.getMonth() === m;
         })
         .reduce((sum, item) => sum + Number(item.price || 0), 0);
     }
@@ -1155,14 +927,10 @@
     }
 
     function renderStats(){
-      const working = state.data.filter(isWorking).length;
-      const reserved = state.data.filter(isReserved).length;
-      const done = state.data.filter(isDone).length;
-      const income = monthlyIncomeValue();
-      $("countWorking").textContent = working;
-      $("countReserved").textContent = reserved;
-      $("countDone").textContent = done;
-      $("monthlyIncome").textContent = money(income);
+      $("countWorking").textContent = state.data.filter(isWorking).length;
+      $("countReserved").textContent = state.data.filter(isReserved).length;
+      $("countDone").textContent = state.data.filter(isDone).length;
+      $("monthlyIncome").textContent = money(monthlyIncomeValue());
 
       const received = state.data.reduce((s, x) => s + Math.min(Number(x.deposit || 0), Number(x.price || 0)), 0);
       const pending = state.data.reduce((s, x) => s + balanceOf(x), 0);
@@ -1174,6 +942,7 @@
 
     function renderTypeOptions(){
       const select = $("typePreset");
+      const current = select.value || "SD";
       select.innerHTML = "";
       state.settings.types.forEach(t => {
         const opt = document.createElement("option");
@@ -1181,27 +950,11 @@
         opt.textContent = `${t.name} (${money(t.price)})`;
         select.appendChild(opt);
       });
-    }
-
-    function typePrice(name){
-      const found = state.settings.types.find(t => t.name === name);
-      return found ? Number(found.price || 0) : 0;
-    }
-
-    function ensureTimerTick(){
-      if(state.data.some(x => x.timerRunning)){
-        if(!window.__cm_timer){
-          window.__cm_timer = setInterval(() => {
-            if(state.data.some(x => x.timerRunning)){
-              renderDetail();
-              renderList();
-              renderBoard();
-            }
-          }, 1000);
-        }
-      }else if(window.__cm_timer){
-        clearInterval(window.__cm_timer);
-        window.__cm_timer = null;
+      if(!Array.from(select.options).some(o => o.value === current)){
+        const custom = document.createElement("option");
+        custom.value = "커스텀";
+        custom.textContent = "커스텀";
+        select.appendChild(custom);
       }
     }
 
@@ -1226,26 +979,20 @@
 
       tbody.innerHTML = data.map(item => {
         const left = dayDiff(item.dueDate);
-        const leftText = item.dueDate
-          ? left === 0 ? "D-Day" : left > 0 ? `D-${left}` : `D+${Math.abs(left)}`
-          : "-";
+        const leftText = item.dueDate ? (left === 0 ? "D-Day" : left > 0 ? `D-${left}` : `D+${Math.abs(left)}`) : "-";
         const progress = progressByStatus(item.status);
         return `
           <tr>
-            <td>
-              <button class="star" onclick="toggleFavorite('${item.id}')">${item.favorite ? "★" : "☆"}</button>
-            </td>
+            <td><button class="star" data-action="toggle-favorite" data-id="${item.id}" type="button">${item.favorite ? "★" : "☆"}</button></td>
             <td>
               <strong>${escapeHtml(item.clientName)}</strong><br>
               <span class="muted" style="font-size:12px">${escapeHtml(item.tag || "")}</span>
             </td>
             <td>${escapeHtml(item.platform)}</td>
-            <td>
-              ${escapeHtml(item.type)}${item.type === "커스텀" && item.customTypeName ? ` / ${escapeHtml(item.customTypeName)}` : ""}
-            </td>
+            <td>${escapeHtml(item.type)}${item.type === "커스텀" && item.customTypeName ? ` / ${escapeHtml(item.customTypeName)}` : ""}</td>
             <td>${money(item.price)}</td>
             <td>${money(item.deposit || 0)} / ${money(balanceOf(item))}</td>
-            <td><span class="pill ${statusClass(item.status)}">${escapeHtml(item.status)}</span></td>
+            <td><span class="pill ${STATUS_COLORS[item.status] || "gray"}">${escapeHtml(item.status)}</span></td>
             <td>${item.dueDate || "-"}</td>
             <td>
               <div class="progress-row">
@@ -1255,10 +1002,10 @@
             </td>
             <td>
               <div class="actions">
-                <button class="icon-btn" onclick="openDetail('${item.id}')">상세</button>
-                <button class="icon-btn" onclick="openEditor('${item.id}')">수정</button>
-                <button class="icon-btn" onclick="duplicateItem('${item.id}')">복제</button>
-                <button class="icon-btn" onclick="deleteItem('${item.id}')">삭제</button>
+                <button class="icon-btn" data-action="detail" data-id="${item.id}" type="button">상세</button>
+                <button class="icon-btn" data-action="edit" data-id="${item.id}" type="button">수정</button>
+                <button class="icon-btn" data-action="copy" data-id="${item.id}" type="button">복제</button>
+                <button class="icon-btn" data-action="delete" data-id="${item.id}" type="button">삭제</button>
               </div>
             </td>
           </tr>
@@ -1268,27 +1015,26 @@
 
     function renderBoard(){
       const board = $("board");
-      const statusList = STATUS_ORDER;
-      board.innerHTML = statusList.map(status => {
+      board.innerHTML = STATUS_ORDER.map(status => {
         const items = filteredData().filter(x => x.status === status);
         return `
-          <div class="column" data-status-col="${status}" ondragover="allowDrop(event)" ondrop="dropStatus(event,'${status}')">
+          <div class="column" data-status-col="${status}">
             <div class="col-head">
               <strong>${status}</strong>
-              <span class="pill ${statusClass(status)}">${items.length}</span>
+              <span class="pill ${STATUS_COLORS[status] || "gray"}">${items.length}</span>
             </div>
-            <div class="dropzone" id="zone-${status.replaceAll(" ","_")}">
+            <div class="dropzone" data-dropzone="${status}">
               ${items.map(item => {
                 const left = dayDiff(item.dueDate);
                 const label = item.dueDate ? (left === 0 ? "D-Day" : left > 0 ? `D-${left}` : `D+${Math.abs(left)}`) : "-";
                 return `
-                  <div class="mini-card" draggable="true" ondragstart="dragStart(event,'${item.id}')" onclick="openDetail('${item.id}')">
+                  <div class="mini-card" draggable="true" data-drag-id="${item.id}" data-open-id="${item.id}">
                     <div class="mini-top">
                       <div>
                         <h4>${item.favorite ? "★ " : ""}${escapeHtml(item.clientName)}</h4>
                         <p>${escapeHtml(item.platform)} · ${escapeHtml(item.type)}${item.type === "커스텀" && item.customTypeName ? ` / ${escapeHtml(item.customTypeName)}` : ""}</p>
                       </div>
-                      <span class="pill ${statusClass(item.status)}">${escapeHtml(label)}</span>
+                      <span class="pill ${STATUS_COLORS[item.status] || "gray"}">${escapeHtml(label)}</span>
                     </div>
                     <div class="mini-tags">
                       <span class="pill gray">${money(item.price)}</span>
@@ -1325,20 +1071,20 @@
         html += `<div class="day empty"></div>`;
       }
 
-      const today = new Date();
-      const isThisMonth = today.getFullYear() === year && today.getMonth() === month;
+      const now = new Date();
+      const isThisMonth = now.getFullYear() === year && now.getMonth() === month;
 
       for(let day=1; day<=lastDate; day++){
         const ymd = `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
         const events = state.data.filter(x => x.dueDate === ymd);
-        const isToday = isThisMonth && today.getDate() === day;
+        const isToday = isThisMonth && now.getDate() === day;
         html += `
           <div class="day ${isToday ? "today" : ""}">
             <div class="day-num">${day}</div>
             ${events.slice(0,3).map(ev => {
               const diff = dayDiff(ev.dueDate);
               const color = diff !== null && diff <= 1 ? "red" : diff !== null && diff <= 3 ? "yellow" : "blue";
-              return `<span class="event ${color}" onclick="openDetail('${ev.id}')">${escapeHtml(ev.clientName)} · ${escapeHtml(ev.status)}</span>`;
+              return `<span class="event ${color}" data-action="detail" data-id="${ev.id}">${escapeHtml(ev.clientName)} · ${escapeHtml(ev.status)}</span>`;
             }).join("")}
             ${events.length > 3 ? `<span class="event green">+${events.length - 3} more</span>` : ""}
           </div>
@@ -1439,14 +1185,14 @@
         const [nameInput, priceInput, delBtn] = row.querySelectorAll("input,button");
         nameInput.addEventListener("input", () => {
           state.settings.types[idx].name = nameInput.value.trim() || "이름없음";
-          saveStorage();
+          saveData();
           renderTypeOptions();
           refreshEditorTypeSelect();
           renderAll();
         });
         priceInput.addEventListener("input", () => {
           state.settings.types[idx].price = Number(priceInput.value || 0);
-          saveStorage();
+          saveData();
           renderTypeOptions();
           refreshEditorTypeSelect();
           renderAll();
@@ -1454,21 +1200,20 @@
         delBtn.addEventListener("click", () => {
           if(state.settings.types.length <= 1) return alert("최소 1개는 남겨둬야 해.");
           state.settings.types.splice(idx, 1);
-          saveStorage();
+          saveData();
           renderTypeOptions();
           refreshEditorTypeSelect();
           renderAll();
         });
         root.appendChild(row);
       });
-
       renderTypeOptions();
       refreshEditorTypeSelect();
     }
 
     function refreshEditorTypeSelect(){
       const select = $("typePreset");
-      const current = select.value || state.data.find(x => x.id === state.editingId)?.type || "반신";
+      const current = select.value || "SD";
       select.innerHTML = "";
       state.settings.types.forEach(t => {
         const opt = document.createElement("option");
@@ -1482,7 +1227,11 @@
         custom.textContent = "커스텀";
         select.appendChild(custom);
       }
-      select.value = current === "커스텀" ? "커스텀" : current;
+      if(Array.from(select.options).some(o => o.value === current)){
+        select.value = current;
+      }else{
+        select.value = "SD";
+      }
       toggleCustomTypeWrap();
     }
 
@@ -1516,7 +1265,7 @@
         <div class="detail-section">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
             <h4 style="margin:0">진행률</h4>
-            <span class="pill ${statusClass(item.status)}">${progress}%</span>
+            <span class="pill ${STATUS_COLORS[item.status] || "gray"}">${progress}%</span>
           </div>
           <div style="margin-top:10px" class="progress"><span style="width:${progress}%"></span></div>
         </div>
@@ -1524,10 +1273,10 @@
         <div class="detail-section">
           <h4>빠른 작업</h4>
           <div class="detail-actions">
-            <button class="btn" onclick="openEditor('${item.id}')">수정</button>
-            <button class="btn" onclick="deleteItem('${item.id}')">삭제</button>
-            <button class="btn" onclick="toggleFavorite('${item.id}')">${item.favorite ? "즐겨찾기 해제" : "즐겨찾기"}</button>
-            <button class="btn" onclick="startOrStopTimer('${item.id}')">${item.timerRunning ? "타이머 정지" : "타이머 시작"}</button>
+            <button class="btn" type="button" data-action="edit" data-id="${item.id}">수정</button>
+            <button class="btn" type="button" data-action="delete" data-id="${item.id}">삭제</button>
+            <button class="btn" type="button" data-action="favorite" data-id="${item.id}">${item.favorite ? "즐겨찾기 해제" : "즐겨찾기"}</button>
+            <button class="btn" type="button" data-action="timer" data-id="${item.id}">${item.timerRunning ? "타이머 정지" : "타이머 시작"}</button>
           </div>
         </div>
 
@@ -1578,20 +1327,15 @@
                     <div class="note">${a.size ? `${Math.round(a.size/1024)} KB` : ""}</div>
                   </div>
                 </div>
-                <button class="icon-btn" onclick="removeAttachment('${item.id}', ${idx})">삭제</button>
+                <button class="icon-btn" type="button" data-action="remove-attach" data-id="${item.id}" data-idx="${idx}">삭제</button>
               </div>
             `).join("") || `<div class="note">첨부파일이 없어.</div>`}
           </div>
         </div>
       `;
 
-      $("detailStatusSelect").addEventListener("change", (e) => {
-        updateItem(item.id, { status: e.target.value });
-      });
-
-      $("detailMemo").addEventListener("input", (e) => {
-        updateItem(item.id, { memo: e.target.value });
-      });
+      $("detailStatusSelect").addEventListener("change", (e) => updateItem(item.id, { status: e.target.value }));
+      $("detailMemo").addEventListener("input", (e) => updateItem(item.id, { memo: e.target.value }));
 
       document.querySelectorAll("[data-check-index]").forEach(box => {
         box.addEventListener("change", (e) => {
@@ -1607,8 +1351,7 @@
       const fileInput = $("detailFileInput");
       fileInput.addEventListener("change", async () => {
         const files = await filesToAttachments(fileInput.files);
-        const newAtt = [...(item.attachments || []), ...files];
-        updateItem(item.id, { attachments: newAtt });
+        updateItem(item.id, { attachments:[...(item.attachments || []), ...files] });
         fileInput.value = "";
       });
     }
@@ -1617,7 +1360,7 @@
       const idx = state.data.findIndex(x => x.id === id);
       if(idx < 0) return;
       state.data[idx] = { ...state.data[idx], ...patch };
-      saveStorage();
+      saveData();
       renderAll(false);
     }
 
@@ -1633,6 +1376,7 @@
       }
       return out;
     }
+
     function readFileAsDataURL(file){
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -1648,6 +1392,7 @@
       $("detailPanel").classList.add("show");
       renderDetail();
     }
+
     function closeDetail(){
       state.selectedId = null;
       $("detailBackdrop").classList.remove("show");
@@ -1670,10 +1415,9 @@
       $("dueDate").value = item?.dueDate || "";
       $("price").value = item?.price ?? 0;
       $("deposit").value = item?.deposit ?? 0;
-      const typePreset = $("typePreset");
+      renderTypeOptions();
       const tName = item?.type === "커스텀" ? "커스텀" : (item?.type || state.settings.types[0]?.name || "SD");
-      refreshEditorTypeSelect();
-      if(Array.from(typePreset.options).some(o => o.value === tName)) typePreset.value = tName;
+      $("typePreset").value = Array.from($("typePreset").options).some(o => o.value === tName) ? tName : "SD";
       $("customTypeName").value = item?.customTypeName || "";
       $("fileInput").value = "";
       toggleCustomTypeWrap();
@@ -1681,6 +1425,7 @@
       $("editorModal").classList.add("show");
       setTimeout(() => $("clientName").focus(), 50);
     }
+
     function closeEditor(){
       state.editingId = null;
       $("modalBackdrop").classList.remove("show");
@@ -1688,9 +1433,8 @@
     }
 
     function toggleCustomTypeWrap(){
-      const isCustom = $("typePreset").value === "커스텀";
-      $("customTypeWrap").style.display = isCustom ? "grid" : "none";
-      if(!isCustom){
+      $("customTypeWrap").style.display = $("typePreset").value === "커스텀" ? "grid" : "none";
+      if($("typePreset").value !== "커스텀"){
         $("customTypeName").value = "";
       }
     }
@@ -1701,19 +1445,9 @@
       const lines = raw.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
       const map = {};
       const keySet = {
-        "닉네임":"clientName",
-        "이름":"clientName",
-        "플랫폼":"platform",
-        "타입":"type",
-        "커미션 타입":"type",
-        "가격":"price",
-        "예약금":"deposit",
-        "잔금":"balance",
-        "마감일":"dueDate",
-        "마감":"dueDate",
-        "상태":"status",
-        "태그":"tag",
-        "메모":"memo"
+        "닉네임":"clientName","이름":"clientName","플랫폼":"platform","타입":"type","커미션 타입":"type",
+        "가격":"price","예약금":"deposit","잔금":"balance","마감일":"dueDate","마감":"dueDate",
+        "상태":"status","태그":"tag","메모":"memo"
       };
 
       function setFromLine(key, value){
@@ -1771,6 +1505,7 @@
       if(m) return `${m[1]}-${String(m[2]).padStart(2,"0")}-${String(m[3]).padStart(2,"0")}`;
       return "";
     }
+
     function toNumber(v){
       const n = String(v).replace(/[^\d]/g,"");
       return Number(n || 0);
@@ -1783,7 +1518,6 @@
       const baseItem = state.editingId ? state.data.find(x => x.id === state.editingId) : null;
       const existingAttachments = baseItem?.attachments || [];
       const newAttachments = await filesToAttachments($("fileInput").files);
-
       const checklist = $("checklistText").value
         .split(/\r?\n/)
         .map(s => s.trim())
@@ -1817,7 +1551,7 @@
         state.data.unshift(item);
       }
 
-      saveStorage();
+      saveData();
       closeEditor();
       renderAll();
       openDetail(item.id);
@@ -1829,7 +1563,7 @@
       if(confirm(`"${item.clientName}" 의뢰를 삭제할까?`)){
         state.data = state.data.filter(x => x.id !== id);
         if(state.selectedId === id) closeDetail();
-        saveStorage();
+        saveData();
         renderAll();
       }
     }
@@ -1844,20 +1578,14 @@
       copy.timerRunning = false;
       copy.timerStartedAt = null;
       state.data.unshift(copy);
-      saveStorage();
+      saveData();
       renderAll();
     }
 
     function toggleFavorite(id){
-      updateItem(id, { favorite: !state.data.find(x => x.id === id)?.favorite });
-    }
-
-    function removeAttachment(id, idx){
       const item = state.data.find(x => x.id === id);
       if(!item) return;
-      const attachments = [...(item.attachments || [])];
-      attachments.splice(idx, 1);
-      updateItem(id, { attachments });
+      updateItem(id, { favorite: !item.favorite });
     }
 
     function startOrStopTimer(id){
@@ -1871,7 +1599,6 @@
           timerStartedAt:null,
           workSeconds:Number(item.workSeconds || 0) + elapsed
         });
-        state.activeTimerId = null;
       }else{
         state.data.forEach(x => {
           if(x.timerRunning && x.id !== id){
@@ -1882,25 +1609,50 @@
           }
         });
         updateItem(id, { timerRunning:true, timerStartedAt:Date.now() });
-        state.activeTimerId = id;
       }
-      saveStorage();
+      saveData();
       renderAll();
     }
 
-    function updateStatus(id, status){
-      updateItem(id, { status });
+    function updateItem(id, patch){
+      const idx = state.data.findIndex(x => x.id === id);
+      if(idx < 0) return;
+      state.data[idx] = { ...state.data[idx], ...patch };
+      saveData();
+      renderAll(false);
     }
 
-    function updateFromDetail(itemId, patch){
-      updateItem(itemId, patch);
+    async function filesToAttachments(fileList){
+      const files = Array.from(fileList || []);
+      const out = [];
+      for(const file of files){
+        let dataUrl = null;
+        if(file.size <= 900000 && (file.type.startsWith("image/") || file.type.startsWith("text/"))){
+          dataUrl = await readFileAsDataURL(file);
+        }
+        out.push({ name:file.name, size:file.size, type:file.type, dataUrl });
+      }
+      return out;
+    }
+    function readFileAsDataURL(file){
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function removeAttachment(id, idx){
+      const item = state.data.find(x => x.id === id);
+      if(!item) return;
+      const attachments = [...(item.attachments || [])];
+      attachments.splice(idx, 1);
+      updateItem(id, { attachments });
     }
 
     function exportBackup(){
-      const blob = new Blob([JSON.stringify({
-        data: state.data,
-        settings: state.settings
-      }, null, 2)], { type:"application/json" });
+      const blob = new Blob([JSON.stringify({ data: state.data, settings: state.settings }, null, 2)], { type:"application/json" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
@@ -1920,9 +1672,8 @@
             state.settings.accent = obj.settings.accent || "#6ea8ff";
             state.settings.types = Array.isArray(obj.settings.types) && obj.settings.types.length ? obj.settings.types : [...defaultTypes];
           }
-          saveStorage();
+          saveData();
           applyTheme();
-          loadAccentButtons();
           renderAll();
         }catch(e){
           alert("백업 파일을 읽지 못했어.");
@@ -1936,7 +1687,7 @@
         state.data = clone(sampleData);
         state.selectedId = null;
         state.editingId = null;
-        saveStorage();
+        saveData();
         renderAll();
         closeDetail();
       }
@@ -1949,9 +1700,8 @@
         state.settings.theme = "dark";
         state.settings.accent = "#6ea8ff";
         state.selectedId = null;
-        saveStorage();
+        saveData();
         applyTheme();
-        loadAccentButtons();
         renderAll();
         closeDetail();
       }
@@ -1969,36 +1719,19 @@
       renderTypeChart();
       renderSettings();
       if(updateDetail) renderDetail();
-      ensureTimerTick();
-    }
-
-    function toggleCustomTypeWrap(){
-      $("customTypeWrap").style.display = $("typePreset").value === "커스텀" ? "grid" : "none";
     }
 
     function bindEvents(){
       $("themeToggle").addEventListener("change", (e) => {
         state.settings.theme = e.target.checked ? "light" : "dark";
-        saveStorage();
+        saveData();
         applyTheme();
       });
 
-      $("searchInput").addEventListener("input", e => {
-        state.search = e.target.value;
-        renderAll();
-      });
-      $("statusFilter").addEventListener("change", e => {
-        state.statusFilter = e.target.value;
-        renderAll();
-      });
-      $("platformFilter").addEventListener("change", e => {
-        state.platformFilter = e.target.value;
-        renderAll();
-      });
-      $("sortFilter").addEventListener("change", e => {
-        state.sortFilter = e.target.value;
-        renderAll();
-      });
+      $("searchInput").addEventListener("input", e => { state.search = e.target.value; renderAll(); });
+      $("statusFilter").addEventListener("change", e => { state.statusFilter = e.target.value; renderAll(); });
+      $("platformFilter").addEventListener("change", e => { state.platformFilter = e.target.value; renderAll(); });
+      $("sortFilter").addEventListener("change", e => { state.sortFilter = e.target.value; renderAll(); });
 
       $("addBtn").addEventListener("click", () => openEditor());
       $("closeModalBtn").addEventListener("click", closeEditor);
@@ -2027,10 +1760,7 @@
         if(state.settings.types.some(t => t.name === name.trim())) return alert("이미 있는 타입이야.");
         const price = Number(prompt("기본 가격", "0") || 0);
         state.settings.types.unshift({ name:name.trim(), price });
-        saveStorage();
-        renderSettings();
-        renderTypeOptions();
-        refreshEditorTypeSelect();
+        saveData();
         renderAll();
       });
 
@@ -2063,7 +1793,52 @@
         });
       });
 
-      $("typePreset").addEventListener("change", toggleCustomTypeWrap);
+      document.addEventListener("click", (e) => {
+        const actionBtn = e.target.closest("[data-action]");
+        if(!actionBtn) return;
+
+        const id = actionBtn.dataset.id;
+        const action = actionBtn.dataset.action;
+
+        if(action === "detail") openDetail(id);
+        if(action === "edit") openEditor(id);
+        if(action === "copy") duplicateItem(id);
+        if(action === "delete") deleteItem(id);
+        if(action === "favorite") toggleFavorite(id);
+        if(action === "timer") startOrStopTimer(id);
+        if(action === "remove-attach") removeAttachment(id, Number(actionBtn.dataset.idx || 0));
+      });
+
+      const board = $("board");
+      board.addEventListener("dragstart", (e) => {
+        const card = e.target.closest("[data-drag-id]");
+        if(!card) return;
+        e.dataTransfer.setData("text/plain", card.dataset.dragId);
+      });
+
+      board.addEventListener("dragover", (e) => {
+        const zone = e.target.closest("[data-dropzone]");
+        if(!zone) return;
+        e.preventDefault();
+        zone.classList.add("dragover");
+      });
+
+      board.addEventListener("dragleave", (e) => {
+        const zone = e.target.closest("[data-dropzone]");
+        if(zone) zone.classList.remove("dragover");
+      });
+
+      board.addEventListener("drop", (e) => {
+        const zone = e.target.closest("[data-dropzone]");
+        if(!zone) return;
+        e.preventDefault();
+        zone.classList.remove("dragover");
+        const id = e.dataTransfer.getData("text/plain");
+        const status = zone.dataset.dropzone;
+        if(id && status){
+          updateItem(id, { status });
+        }
+      });
 
       document.addEventListener("keydown", (e) => {
         if(e.key === "Escape"){
@@ -2077,48 +1852,28 @@
       });
     }
 
-    function allowDrop(ev){
-      ev.preventDefault();
-      ev.currentTarget.classList.add("dragover");
-    }
-    function dragStart(ev, id){
-      ev.dataTransfer.setData("text/plain", id);
-    }
-    function dropStatus(ev, status){
-      ev.preventDefault();
-      ev.currentTarget.classList.remove("dragover");
-      const id = ev.dataTransfer.getData("text/plain");
-      if(!id) return;
-      updateItem(id, { status });
-      if(state.selectedId === id) renderDetail();
-      renderAll();
-    }
-    document.addEventListener("dragend", () => {
-      document.querySelectorAll(".dropzone").forEach(z => z.classList.remove("dragover"));
-    });
-
     function init(){
-      loadStorage();
+      loadData();
       applyTheme();
-      loadAccentButtons();
       bindEvents();
       nowDateText();
       renderAll();
-      const active = state.data.find(x => x.timerRunning);
-      if(active) state.activeTimerId = active.id;
     }
 
-    window.openEditor = openEditor;
     window.openDetail = openDetail;
+    window.openEditor = openEditor;
     window.deleteItem = deleteItem;
     window.duplicateItem = duplicateItem;
     window.toggleFavorite = toggleFavorite;
-    window.removeAttachment = removeAttachment;
     window.startOrStopTimer = startOrStopTimer;
-    window.updateStatus = updateStatus;
-    window.allowDrop = allowDrop;
-    window.dragStart = dragStart;
-    window.dropStatus = dropStatus;
+    window.removeAttachment = removeAttachment;
+
+    function toggleCustomTypeWrap(){
+      $("customTypeWrap").style.display = $("typePreset").value === "커스텀" ? "grid" : "none";
+      if($("typePreset").value !== "커스텀"){
+        $("customTypeName").value = "";
+      }
+    }
 
     init();
   </script>
