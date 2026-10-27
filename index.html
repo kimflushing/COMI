@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commission Manager</title>
+  <style>
+    :root{
+      --bg:#0f1115;
+      --panel:#151922;
+      --panel-2:#1b2030;
+      --line:#2a3142;
+      --text:#f3f6ff;
+      --muted:#9aa4bd;
+      --accent:#6ea8ff;
+      --accent-2:#7cf0c5;
+      --danger:#ff6b7a;
+      --warning:#ffcf5b;
+      --success:#4fe08f;
+      --shadow:0 16px 40px rgba(0,0,0,.35);
+      --radius:18px;
+      --radius-sm:12px;
+    }
+
+    [data-theme="light"]{
+      --bg:#f4f7fb;
+      --panel:#ffffff;
+      --panel-2:#eef3fb;
+      --line:#d9e1ef;
+      --text:#101521;
+      --muted:#5d6679;
+      --shadow:0 16px 30px rgba(18,28,45,.08);
+    }
+
+    *{box-sizing:border-box}
+    html,body{
+      margin:0;
+      width:100%;
+      min-height:100%;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Pretendard",sans-serif;
+      background:linear-gradient(180deg,var(--bg),color-mix(in srgb, var(--bg) 85%, #000 15%));
+      color:var(--text);
+    }
+
+    button,input,select,textarea{
+      font:inherit;
+    }
+
+    button{
+      cursor:pointer;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .app{
+      display:grid;
+      grid-template-columns: 260px 1fr;
+      min-height:100vh;
+    }
+
+    .sidebar{
+      background:linear-gradient(180deg,var(--panel),color-mix(in srgb, var(--panel) 82%, #000 18%));
+      border-right:1px solid var(--line);
+      padding:22px 18px;
+      position:sticky;
+      top:0;
+      height:100vh;
+      overflow:auto;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:22px;
+      padding:8px 8px 18px;
+      border-bottom:1px solid var(--line);
+    }
+
+    .brand-badge{
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      background:linear-gradient(135deg,var(--accent),#8f7cff);
+      display:grid;
+      place-items:center;
+      font-weight:800;
+      box-shadow:var(--shadow);
+    }
+
+    .brand h1{
+      font-size:18px;
+      margin:0;
+      line-height:1.2;
+    }
+
+    .brand p{
+      margin:2px 0 0;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .nav{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-top:14px;
+    }
+
+    .nav button{
+      border:1px solid transparent;
+      background:transparent;
+      color:var(--text);
+      padding:12px 14px;
+      border-radius:14px;
+      text-align:left;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      transition:.18s ease;
+    }
+
+    .nav button:hover,
+    .nav button.active{
+      background:color-mix(in srgb, var(--accent) 14%, transparent);
+      border-color:color-mix(in srgb, var(--accent) 25%, transparent);
+    }
+
+    .sidebar-card{
+      margin-top:18px;
+      padding:14px;
+      border-radius:16px;
+      background:var(--panel-2);
+      border:1px solid var(--line);
+    }
+
+    .sidebar-card h3{
+      margin:0 0 10px;
+      font-size:14px;
+    }
+
+    .sidebar-card .mini{
+      display:grid;
+      gap:8px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .main{
+      padding:22px;
+      max-width:1600px;
+      width:100%;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+
+    .topbar h2{
+      margin:0;
+      font-size:28px;
+    }
+
+    .top-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .search{
+      min-width:min(440px, 100%);
+      flex:1;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      background:var(--panel);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+
+    .search input{
+      border:none;
+      outline:none;
+      background:transparent;
+      color:var(--text);
+      width:100%;
+    }
+
+    .btn{
+      border:none;
+      background:var(--panel);
+      color:var(--text);
+      border:1px solid var(--line);
+      padding:12px 14px;
+      border-radius:14px;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      transition:.18s ease;
+      box-shadow:var(--shadow);
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      border-color:color-mix(in srgb, var(--accent) 35%, var(--line));
+    }
+
+    .btn.primary{
+      background:linear-gradient(135deg,var(--accent),#8c7bff);
+      border-color:transparent;
+      color:#fff;
+      font-weight:700;
+    }
+
+    .grid{
+      display:grid;
+      gap:16px;
+    }
+
+    .stats{
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      margin-bottom:16px;
+    }
+
+    .card{
+      background:linear-gradient(180deg,var(--panel),color-mix(in srgb, var(--panel) 88%, #000 12%));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+
+    .stat-label{
+      color:var(--muted);
+      font-size:13px;
+      margin:0 0 10px;
+    }
+
+    .stat-value{
+      font-size:28px;
+      font-weight:800;
+      margin:0;
+      letter-spacing:-.02em;
+    }
+
+    .stat-sub{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns: 1.7fr .95fr;
+      gap:16px;
+      align-items:start;
+    }
+
+    .section-title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:14px;
+    }
+
+    .section-title h3{
+      margin:0;
+      font-size:18px;
+    }
+
+    .filters{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:14px;
+    }
+
+    .filters select,
+    .filters input{
+      background:var(--panel);
+      color:var(--text);
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:10px 12px;
+      outline:none;
+    }
+
+    .table-wrap{
+      overflow:auto;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background:var(--panel);
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:920px;
+    }
+
+    thead th{
+      text-align:left;
+      padding:14px 14px;
+      font-size:13px;
+      color:var(--muted);
+      border-bottom:1px solid var(--line);
+      background:color-mix(in srgb, var(--panel) 82%, #fff 2%);
+      position:sticky;
+      top:0;
+      z-index:1;
+    }
+
+    tbody td{
+      padding:14px;
+      border-bottom:1px solid color-mix(in srgb, var(--line) 75%, transparent);
+      vertical-align:top;
+      font-size:14px;
+    }
+
+    tbody tr:hover{
+      background:color-mix(in srgb, var(--accent) 8%, transparent);
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .pill.gray{background:color-mix(in srgb, var(--muted) 15%, transparent); color:var(--text);}
+    .pill.blue{background:color-mix(in srgb, var(--accent) 18%, transparent); color:#d8e7ff;}
+    .pill.green{background:color-mix(in srgb, var(--success) 18%, transparent); color:#d7ffe9;}
+    .pill.yellow{background:color-mix(in srgb, var(--warning) 18%, transparent); color:#fff0c8;}
+    .pill.red{background:color-mix(in srgb, var(--danger) 18%, transparent); color:#ffd7dc;}
+
+    .row-actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .icon-btn{
+      border:none;
+      background:var(--panel-2);
+      color:var(--text);
+      border:1px solid var(--line);
+      border-radius:10px;
+      padding:8px 10px;
+    }
+
+    .panel{
+      display:grid;
+      gap:16px;
+    }
+
+    .list{
+      display:grid;
+      gap:10px;
+    }
+
+    .mini-card{
+      border:1px solid var(--line);
+      background:var(--panel);
+      border-radius:16px;
+      padding:14px;
+    }
+
+    .mini-card h4{
+      margin:0 0 8px;
+      font-size:15px;
+    }
+
+    .mini-card p{
+      margin:4px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .progress{
+      width:100%;
+      height:10px;
+      background:color-mix(in srgb, var(--muted) 18%, transparent);
+      border-radius:999px;
+      overflow:hidden;
+      margin-top:10px;
+    }
+
+    .progress span{
+      display:block;
+      height:100%;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--accent),#8f7cff);
+    }
+
+    .calendar{
+      display:grid;
+      grid-template-columns:repeat(7,1fr);
+      gap:8px;
+    }
+
+    .day-head{
+      font-size:12px;
+      color:var(--muted);
+      text-align:center;
+      padding:6px 0 2px;
+    }
+
+    .day{
+      min-height:70px;
+      border:1px solid var(--line);
+      background:var(--panel);
+      border-radius:14px;
+      padding:8px;
+      font-size:13px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .day .num{
+      font-weight:800;
+      font-size:14px;
+      margin-bottom:5px;
+    }
+
+    .day.empty{
+      opacity:.3;
+      background:transparent;
+      border-style:dashed;
+    }
+
+    .day.today{
+      outline:2px solid color-mix(in srgb, var(--accent) 75%, transparent);
+    }
+
+    .event{
+      display:block;
+      margin-top:4px;
+      padding:4px 6px;
+      border-radius:8px;
+      font-size:11px;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+
+    .event.red{background:color-mix(in srgb, var(--danger) 20%, transparent);}
+    .event.yellow{background:color-mix(in srgb, var(--warning) 22%, transparent);}
+    .event.green{background:color-mix(in srgb, var(--success) 18%, transparent);}
+    .event.blue{background:color-mix(in srgb, var(--accent) 18%, transparent);}
+
+    .empty-state{
+      text-align:center;
+      padding:26px;
+      color:var(--muted);
+    }
+
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:50;
+    }
+
+    .modal-backdrop.show{
+      display:flex;
+    }
+
+    .modal{
+      width:min(860px,100%);
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .modal-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:18px 18px 14px;
+      border-bottom:1px solid var(--line);
+    }
+
+    .modal-header h3{
+      margin:0;
+    }
+
+    .modal-body{
+      padding:18px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+    }
+
+    .field{
+      display:grid;
+      gap:7px;
+    }
+
+    .field.full{
+      grid-column:1 / -1;
+    }
+
+    .field label{
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .field input,
+    .field select,
+    .field textarea{
+      width:100%;
+      background:var(--panel-2);
+      color:var(--text);
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:11px 12px;
+      outline:none;
+      resize:vertical;
+    }
+
+    .modal-actions{
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      padding:0 18px 18px;
+      flex-wrap:wrap;
+    }
+
+    .note{
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.6;
+    }
+
+    .hidden{
+      display:none !important;
+    }
+
+    @media (max-width: 1120px){
+      .app{
+        grid-template-columns:1fr;
+      }
+      .sidebar{
+        position:static;
+        height:auto;
+      }
+      .layout{
+        grid-template-columns:1fr;
+      }
+      .stats{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+      .main{
+        padding:16px;
+      }
+    }
+
+    @media (max-width: 720px){
+      .stats{
+        grid-template-columns:1fr;
+      }
+      .form-grid{
+        grid-template-columns:1fr;
+      }
+      .search{
+        min-width:100%;
+      }
+      .topbar h2{
+        font-size:24px;
+      }
+      .calendar{
+        gap:6px;
+      }
+      .day{
+        min-height:64px;
+        padding:6px;
+        font-size:12px;
+      }
+    }
+  </style>
+</head>
+<body data-theme="dark">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-badge">CM</div>
+        <div>
+          <h1>Commission Manager</h1>
+          <p>크레페 / 커미션 관리</p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="active" data-nav="dashboard">🏠 Dashboard</button>
+        <button data-nav="list">📋 Commission</button>
+        <button data-nav="calendar">📅 Calendar</button>
+        <button data-nav="income">💰 Income</button>
+        <button data-nav="stats">📊 Statistics</button>
+      </nav>
+
+      <div class="sidebar-card">
+        <h3>오늘 요약</h3>
+        <div class="mini" id="sidebarSummary">
+          <div>진행중 0건</div>
+          <div>예약 0건</div>
+          <div>완료 0건</div>
+          <div>예상 수익 ₩0</div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>설정</h3>
+        <div class="mini">
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+            <input type="checkbox" id="themeToggle" />
+            라이트 모드
+          </label>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <h2>Commission Manager</h2>
+          <div class="note" id="todayText"></div>
+        </div>
+
+        <div class="top-actions">
+          <div class="search">
+            🔍 <input id="searchInput" type="text" placeholder="닉네임, 플랫폼, 타입, 메모 검색" />
+          </div>
+          <button class="btn primary" id="addBtn">＋ 새 의뢰</button>
+          <button class="btn" id="resetDemoBtn">샘플 복원</button>
+        </div>
+      </div>
+
+      <section class="grid stats" id="statsCards">
+        <div class="card">
+          <p class="stat-label">진행중</p>
+          <p class="stat-value" id="countWorking">0</p>
+          <div class="stat-sub">작업 중인 커미션</div>
+        </div>
+        <div class="card">
+          <p class="stat-label">예약</p>
+          <p class="stat-value" id="countReserved">0</p>
+          <div class="stat-sub">대기 중인 의뢰</div>
+        </div>
+        <div class="card">
+          <p class="stat-label">완료</p>
+          <p class="stat-value" id="countDone">0</p>
+          <div class="stat-sub">종료된 커미션</div>
+        </div>
+        <div class="card">
+          <p class="stat-label">이번 달 수익</p>
+          <p class="stat-value" id="monthlyIncome">₩0</p>
+          <div class="stat-sub">예상 + 확정 합산</div>
+        </div>
+      </section>
+
+      <section class="layout" style="margin-top:16px;">
+        <div class="card">
+          <div class="section-title">
+            <h3>커미션 목록</h3>
+            <div class="filters">
+              <select id="statusFilter">
+                <option value="">전체 상태</option>
+                <option value="문의">문의</option>
+                <option value="예약">예약</option>
+                <option value="입금 확인">입금 확인</option>
+                <option value="작업 중">작업 중</option>
+                <option value="컨펌">컨펌</option>
+                <option value="전달 완료">전달 완료</option>
+                <option value="완료">완료</option>
+              </select>
+
+              <select id="platformFilter">
+                <option value="">전체 플랫폼</option>
+                <option value="크레페">크레페</option>
+                <option value="DM">DM</option>
+                <option value="이메일">이메일</option>
+                <option value="기타">기타</option>
+              </select>
+
+              <select id="sortFilter">
+                <option value="dueAsc">마감 빠른 순</option>
+                <option value="dueDesc">마감 늦은 순</option>
+                <option value="priceDesc">가격 높은 순</option>
+                <option value="priceAsc">가격 낮은 순</option>
+                <option value="newDesc">최신 등록 순</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>닉네임</th>
+                  <th>플랫폼</th>
+                  <th>타입</th>
+                  <th>가격</th>
+                  <th>상태</th>
+                  <th>마감</th>
+                  <th>진행</th>
+                  <th>작업</th>
+                </tr>
+              </thead>
+              <tbody id="commissionList"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="card">
+            <div class="section-title">
+              <h3>마감 임박</h3>
+            </div>
+            <div class="list" id="deadlineList"></div>
+          </div>
+
+          <div class="card">
+            <div class="section-title">
+              <h3>캘린더</h3>
+            </div>
+            <div id="calendarTitle" class="note" style="margin-bottom:10px;"></div>
+            <div class="calendar" id="calendarGrid"></div>
+          </div>
+
+          <div class="card">
+            <div class="section-title">
+              <h3>수익 요약</h3>
+            </div>
+            <div class="list">
+              <div class="mini-card">
+                <h4>받은 돈</h4>
+                <p id="receivedMoney">₩0</p>
+              </div>
+              <div class="mini-card">
+                <h4>받을 돈</h4>
+                <p id="pendingMoney">₩0</p>
+              </div>
+              <div class="mini-card">
+                <h4>총 매출</h4>
+                <p id="totalMoney">₩0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">새 의뢰 추가</h3>
+        <button class="icon-btn" id="closeModalBtn">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="commissionForm">
+          <div class="form-grid">
+            <div class="field">
+              <label>닉네임</label>
+              <input type="text" id="clientName" required />
+            </div>
+
+            <div class="field">
+              <label>플랫폼</label>
+              <select id="platform">
+                <option>크레페</option>
+                <option>DM</option>
+                <option>이메일</option>
+                <option>기타</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>타입</label>
+              <input type="text" id="type" placeholder="SD / 반신 / 전신" required />
+            </div>
+
+            <div class="field">
+              <label>상태</label>
+              <select id="status">
+                <option>문의</option>
+                <option>예약</option>
+                <option>입금 확인</option>
+                <option>작업 중</option>
+                <option>컨펌</option>
+                <option>전달 완료</option>
+                <option>완료</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>가격</label>
+              <input type="number" id="price" min="0" step="1000" value="0" required />
+            </div>
+
+            <div class="field">
+              <label>예약금</label>
+              <input type="number" id="deposit" min="0" step="1000" value="0" />
+            </div>
+
+            <div class="field">
+              <label>마감일</label>
+              <input type="date" id="dueDate" />
+            </div>
+
+            <div class="field">
+              <label>태그</label>
+              <input type="text" id="tag" placeholder="#SD #크레페" />
+            </div>
+
+            <div class="field full">
+              <label>메모</label>
+              <textarea id="memo" rows="4" placeholder="의뢰 메모, 주의사항, 색감, 요구사항..."></textarea>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" class="btn" id="cancelBtn">취소</button>
+            <button type="submit" class="btn primary" id="saveBtn">저장</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "commission-manager-data-v1";
+    const THEME_KEY = "commission-manager-theme-v1";
+
+    const moneyKRW = (n) => new Intl.NumberFormat("ko-KR").format(Number(n || 0));
+    const fmtKRW = (n) => `₩${moneyKRW(n)}`;
+    const today = new Date();
+
+    const state = {
+      data: [],
+      editingId: null,
+      search: "",
+      status: "",
+      platform: "",
+      sort: "dueAsc",
+    };
+
+    const els = {
+      body: document.body,
+      todayText: document.getElementById("todayText"),
+      searchInput: document.getElementById("searchInput"),
+      statusFilter: document.getElementById("statusFilter"),
+      platformFilter: document.getElementById("platformFilter"),
+      sortFilter: document.getElementById("sortFilter"),
+      commissionList: document.getElementById("commissionList"),
+      deadlineList: document.getElementById("deadlineList"),
+      calendarGrid: document.getElementById("calendarGrid"),
+      calendarTitle: document.getElementById("calendarTitle"),
+      modalBackdrop: document.getElementById("modalBackdrop"),
+      modalTitle: document.getElementById("modalTitle"),
+      form: document.getElementById("commissionForm"),
+      addBtn: document.getElementById("addBtn"),
+      closeModalBtn: document.getElementById("closeModalBtn"),
+      cancelBtn: document.getElementById("cancelBtn"),
+      resetDemoBtn: document.getElementById("resetDemoBtn"),
+      themeToggle: document.getElementById("themeToggle"),
+
+      clientName: document.getElementById("clientName"),
+      platform: document.getElementById("platform"),
+      type: document.getElementById("type"),
+      status: document.getElementById("status"),
+      price: document.getElementById("price"),
+      deposit: document.getElementById("deposit"),
+      dueDate: document.getElementById("dueDate"),
+      tag: document.getElementById("tag"),
+      memo: document.getElementById("memo"),
+
+      countWorking: document.getElementById("countWorking"),
+      countReserved: document.getElementById("countReserved"),
+      countDone: document.getElementById("countDone"),
+      monthlyIncome: document.getElementById("monthlyIncome"),
+      receivedMoney: document.getElementById("receivedMoney"),
+      pendingMoney: document.getElementById("pendingMoney"),
+      totalMoney: document.getElementById("totalMoney"),
+      sidebarSummary: document.getElementById("sidebarSummary"),
+    };
+
+    const sampleData = [
+      {
+        id: crypto.randomUUID(),
+        clientName: "김○○",
+        platform: "크레페",
+        type: "반신",
+        status: "작업 중",
+        price: 50000,
+        deposit: 25000,
+        dueDate: getDateOffset(2),
+        tag: "#크레페 #반신",
+        memo: "배경 단순화",
+        createdAt: Date.now() - 86400000 * 2,
+      },
+      {
+        id: crypto.randomUUID(),
+        clientName: "박○○",
+        platform: "크레페",
+        type: "SD",
+        status: "예약",
+        price: 35000,
+        deposit: 10000,
+        dueDate: getDateOffset(6),
+        tag: "#SD",
+        memo: "예약 상태",
+        createdAt: Date.now() - 86400000 * 1,
+      },
+      {
+        id: crypto.randomUUID(),
+        clientName: "이○○",
+        platform: "DM",
+        type: "전신",
+        status: "완료",
+        price: 120000,
+        deposit: 120000,
+        dueDate: getDateOffset(-4),
+        tag: "#전신",
+        memo: "완료본 전달",
+        createdAt: Date.now() - 86400000 * 12,
+      },
+    ];
+
+    function getDateOffset(days){
+      const d = new Date();
+      d.setDate(d.getDate() + days);
+      return d.toISOString().slice(0,10);
+    }
+
+    function saveData(){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state.data));
+    }
+
+    function loadData(){
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if(saved){
+        try{
+          state.data = JSON.parse(saved);
+        }catch{
+          state.data = [];
+        }
+      }else{
+        state.data = [...sampleData];
+        saveData();
+      }
+    }
+
+    function saveTheme(theme){
+      localStorage.setItem(THEME_KEY, theme);
+      document.body.dataset.theme = theme;
+      els.themeToggle.checked = theme === "light";
+    }
+
+    function loadTheme(){
+      const saved = localStorage.getItem(THEME_KEY) || "dark";
+      saveTheme(saved);
+    }
+
+    function statusClass(status){
+      switch(status){
+        case "완료": return "green";
+        case "전달 완료": return "green";
+        case "작업 중": return "blue";
+        case "입금 확인": return "yellow";
+        case "예약": return "gray";
+        case "컨펌": return "blue";
+        default: return "red";
+      }
+    }
+
+    function progressPercent(status){
+      const order = ["문의","예약","입금 확인","작업 중","컨펌","전달 완료","완료"];
+      const idx = order.indexOf(status);
+      if(idx === -1) return 0;
+      return Math.round(((idx + 1) / order.length) * 100);
+    }
+
+    function daysLeft(dateStr){
+      if(!dateStr) return null;
+      const target = new Date(dateStr + "T00:00:00");
+      const now = new Date();
+      now.setHours(0,0,0,0);
+      const diff = Math.ceil((target - now) / 86400000);
+      return diff;
+    }
+
+    function render(){
+      const filtered = getFilteredData();
+      renderStats(filtered);
+      renderSidebar(filtered);
+      renderList(filtered);
+      renderDeadlineList(filtered);
+      renderIncome(filtered);
+      renderCalendar(filtered);
+    }
+
+    function getFilteredData(){
+      let data = [...state.data];
+
+      const q = state.search.trim().toLowerCase();
+      if(q){
+        data = data.filter(item =>
+          [item.clientName, item.platform, item.type, item.status, item.tag, item.memo]
+            .join(" ")
+            .toLowerCase()
+            .includes(q)
+        );
+      }
+
+      if(state.status){
+        data = data.filter(item => item.status === state.status);
+      }
+
+      if(state.platform){
+        data = data.filter(item => item.platform === state.platform);
+      }
+
+      switch(state.sort){
+        case "dueAsc":
+          data.sort((a,b) => (a.dueDate || "9999-12-31").localeCompare(b.dueDate || "9999-12-31"));
+          break;
+        case "dueDesc":
+          data.sort((a,b) => (b.dueDate || "").localeCompare(a.dueDate || ""));
+          break;
+        case "priceDesc":
+          data.sort((a,b) => (b.price||0) - (a.price||0));
+          break;
+        case "priceAsc":
+          data.sort((a,b) => (a.price||0) - (b.price||0));
+          break;
+        case "newDesc":
+          data.sort((a,b) => (b.createdAt||0) - (a.createdAt||0));
+          break;
+      }
+
+      return data;
+    }
+
+    function renderStats(data){
+      const working = state.data.filter(item => item.status === "작업 중" || item.status === "컨펌" || item.status === "입금 확인").length;
+      const reserved = state.data.filter(item => item.status === "예약" || item.status === "문의").length;
+      const done = state.data.filter(item => item.status === "완료" || item.status === "전달 완료").length;
+      const monthly = getMonthlyIncome();
+
+      els.countWorking.textContent = working;
+      els.countReserved.textContent = reserved;
+      els.countDone.textContent = done;
+      els.monthlyIncome.textContent = fmtKRW(monthly);
+
+      const received = state.data.reduce((sum, item) => sum + Math.min(Number(item.deposit || 0), Number(item.price || 0)), 0);
+      const pending = state.data.reduce((sum, item) => sum + Math.max(0, Number(item.price || 0) - Number(item.deposit || 0)), 0);
+      const total = state.data.reduce((sum, item) => sum + Number(item.price || 0), 0);
+
+      els.receivedMoney.textContent = fmtKRW(received);
+      els.pendingMoney.textContent = fmtKRW(pending);
+      els.totalMoney.textContent = fmtKRW(total);
+    }
+
+    function getMonthlyIncome(){
+      const y = today.getFullYear();
+      const m = today.getMonth();
+      return state.data
+        .filter(item => {
+          const d = item.dueDate ? new Date(item.dueDate + "T00:00:00") : null;
+          if(!d) return false;
+          return d.getFullYear() === y && d.getMonth() === m && (item.status === "완료" || item.status === "전달 완료" || item.status === "입금 확인" || item.status === "작업 중" || item.status === "컨펌");
+        })
+        .reduce((sum, item) => sum + Number(item.price || 0), 0);
+    }
+
+    function renderSidebar(data){
+      const working = state.data.filter(item => item.status === "작업 중" || item.status === "컨펌" || item.status === "입금 확인").length;
+      const reserved = state.data.filter(item => item.status === "예약" || item.status === "문의").length;
+      const done = state.data.filter(item => item.status === "완료" || item.status === "전달 완료").length;
+      const expected = state.data.reduce((sum, item) => sum + Number(item.price || 0), 0);
+
+      els.sidebarSummary.innerHTML = `
+        <div>진행중 ${working}건</div>
+        <div>예약 ${reserved}건</div>
+        <div>완료 ${done}건</div>
+        <div>예상 수익 ${fmtKRW(expected)}</div>
+      `;
+    }
+
+    function renderList(data){
+      if(!data.length){
+        els.commissionList.innerHTML = `
+          <tr>
+            <td colspan="8">
+              <div class="empty-state">조건에 맞는 커미션이 없습니다.</div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      els.commissionList.innerHTML = data.map(item => {
+        const left = daysLeft(item.dueDate);
+        const leftText = item.dueDate
+          ? (left === 0 ? "D-Day" : `D${left > 0 ? "-" : "+"}${Math.abs(left)}`)
+          : "-";
+
+        return `
+          <tr>
+            <td>
+              <strong>${escapeHtml(item.clientName)}</strong><br>
+              <span style="color:var(--muted);font-size:12px;">${escapeHtml(item.tag || "")}</span>
+            </td>
+            <td>${escapeHtml(item.platform)}</td>
+            <td>${escapeHtml(item.type)}</td>
+            <td>${fmtKRW(item.price)}</td>
+            <td><span class="pill ${statusClass(item.status)}">${escapeHtml(item.status)}</span></td>
+            <td>${item.dueDate || "-"}</td>
+            <td>
+              <div style="min-width:120px;">
+                <div style="display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);margin-bottom:6px;">
+                  <span>${leftText}</span>
+                  <span>${progressPercent(item.status)}%</span>
+                </div>
+                <div class="progress"><span style="width:${progressPercent(item.status)}%"></span></div>
+              </div>
+            </td>
+            <td>
+              <div class="row-actions">
+                <button class="icon-btn" onclick="editItem('${item.id}')">수정</button>
+                <button class="icon-btn" onclick="duplicateItem('${item.id}')">복제</button>
+                <button class="icon-btn" onclick="deleteItem('${item.id}')">삭제</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function renderDeadlineList(data){
+      const sorted = [...state.data]
+        .filter(item => item.dueDate)
+        .sort((a,b) => (a.dueDate || "").localeCompare(b.dueDate || ""))
+        .slice(0, 6);
+
+      if(!sorted.length){
+        els.deadlineList.innerHTML = `<div class="empty-state">마감 일정이 없습니다.</div>`;
+        return;
+      }
+
+      els.deadlineList.innerHTML = sorted.map(item => {
+        const left = daysLeft(item.dueDate);
+        const label = left === null ? "-" : left === 0 ? "오늘" : left > 0 ? `D-${left}` : `D+${Math.abs(left)}`;
+        let color = "blue";
+        if(left !== null && left <= 1) color = "red";
+        else if(left !== null && left <= 3) color = "yellow";
+        else if(left !== null && left <= 7) color = "green";
+
+        return `
+          <div class="mini-card">
+            <h4>${escapeHtml(item.clientName)} <span class="pill ${color}">${label}</span></h4>
+            <p>${escapeHtml(item.type)} · ${escapeHtml(item.platform)}</p>
+            <p>${item.dueDate || "-"}</p>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderCalendar(data){
+      const year = today.getFullYear();
+      const month = today.getMonth();
+      const monthName = new Intl.DateTimeFormat("ko-KR", { year:"numeric", month:"long" }).format(today);
+      els.calendarTitle.textContent = monthName;
+
+      const first = new Date(year, month, 1);
+      const startDay = first.getDay();
+      const lastDate = new Date(year, month + 1, 0).getDate();
+      const weekdays = ["일","월","화","수","목","금","토"];
+
+      const cells = [];
+
+      weekdays.forEach(w => {
+        cells.push(`<div class="day-head">${w}</div>`);
+      });
+
+      for(let i = 0; i < startDay; i++){
+        cells.push(`<div class="day empty"></div>`);
+      }
+
+      for(let day = 1; day <= lastDate; day++){
+        const dateStr = `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
+        const items = state.data.filter(item => item.dueDate === dateStr);
+        const isToday =
+          today.getFullYear() === year &&
+          today.getMonth() === month &&
+          today.getDate() === day;
+
+        let html = `<div class="day ${isToday ? "today" : ""}"><div class="num">${day}</div>`;
+        items.slice(0,3).forEach(item => {
+          const color = daysLeft(item.dueDate) <= 1 ? "red" : daysLeft(item.dueDate) <= 3 ? "yellow" : "blue";
+          html += `<span class="event ${color}">${escapeHtml(item.clientName)} · ${escapeHtml(item.status)}</span>`;
+        });
+        if(items.length > 3){
+          html += `<span class="event green">+${items.length - 3} more</span>`;
+        }
+        html += `</div>`;
+        cells.push(html);
+      }
+
+      els.calendarGrid.innerHTML = cells.join("");
+    }
+
+    function openModal(item = null){
+      state.editingId = item ? item.id : null;
+      els.modalTitle.textContent = item ? "의뢰 수정" : "새 의뢰 추가";
+
+      els.clientName.value = item?.clientName || "";
+      els.platform.value = item?.platform || "크레페";
+      els.type.value = item?.type || "";
+      els.status.value = item?.status || "문의";
+      els.price.value = item?.price ?? 0;
+      els.deposit.value = item?.deposit ?? 0;
+      els.dueDate.value = item?.dueDate || "";
+      els.tag.value = item?.tag || "";
+      els.memo.value = item?.memo || "";
+
+      els.modalBackdrop.classList.add("show");
+      setTimeout(() => els.clientName.focus(), 50);
+    }
+
+    function closeModal(){
+      els.modalBackdrop.classList.remove("show");
+      state.editingId = null;
+      els.form.reset();
+      els.platform.value = "크레페";
+      els.status.value = "문의";
+      els.price.value = 0;
+      els.deposit.value = 0;
+    }
+
+    function editItem(id){
+      const item = state.data.find(x => x.id === id);
+      if(item) openModal(item);
+    }
+
+    function deleteItem(id){
+      const item = state.data.find(x => x.id === id);
+      if(!item) return;
+      if(confirm(`"${item.clientName}" 의뢰를 삭제할까?`)){
+        state.data = state.data.filter(x => x.id !== id);
+        saveData();
+        render();
+      }
+    }
+
+    function duplicateItem(id){
+      const item = state.data.find(x => x.id === id);
+      if(!item) return;
+      const copy = {
+        ...structuredClone(item),
+        id: crypto.randomUUID(),
+        clientName: `${item.clientName} 복사`,
+        createdAt: Date.now(),
+      };
+      state.data.unshift(copy);
+      saveData();
+      render();
+    }
+
+    function escapeHtml(str){
+      return String(str ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#39;");
+    }
+
+    els.form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const item = {
+        id: state.editingId || crypto.randomUUID(),
+        clientName: els.clientName.value.trim(),
+        platform: els.platform.value,
+        type: els.type.value.trim(),
+        status: els.status.value,
+        price: Number(els.price.value || 0),
+        deposit: Number(els.deposit.value || 0),
+        dueDate: els.dueDate.value,
+        tag: els.tag.value.trim(),
+        memo: els.memo.value.trim(),
+        createdAt: state.editingId
+          ? (state.data.find(x => x.id === state.editingId)?.createdAt || Date.now())
+          : Date.now(),
+      };
+
+      if(state.editingId){
+        state.data = state.data.map(x => x.id === state.editingId ? item : x);
+      }else{
+        state.data.unshift(item);
+      }
+
+      saveData();
+      closeModal();
+      render();
+    });
+
+    els.addBtn.addEventListener("click", () => openModal());
+    els.closeModalBtn.addEventListener("click", closeModal);
+    els.cancelBtn.addEventListener("click", closeModal);
+    els.modalBackdrop.addEventListener("click", (e) => {
+      if(e.target === els.modalBackdrop) closeModal();
+    });
+
+    els.searchInput.addEventListener("input", (e) => {
+      state.search = e.target.value;
+      render();
+    });
+
+    els.statusFilter.addEventListener("change", (e) => {
+      state.status = e.target.value;
+      render();
+    });
+
+    els.platformFilter.addEventListener("change", (e) => {
+      state.platform = e.target.value;
+      render();
+    });
+
+    els.sortFilter.addEventListener("change", (e) => {
+      state.sort = e.target.value;
+      render();
+    });
+
+    els.themeToggle.addEventListener("change", (e) => {
+      saveTheme(e.target.checked ? "light" : "dark");
+    });
+
+    els.resetDemoBtn.addEventListener("click", () => {
+      if(confirm("샘플 데이터로 복원할까? 지금 저장된 데이터는 덮어써져.")){
+        state.data = [...sampleData];
+        saveData();
+        render();
+      }
+    });
+
+    document.querySelectorAll(".nav button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".nav button").forEach(x => x.classList.remove("active"));
+        btn.classList.add("active");
+
+        const target = btn.dataset.nav;
+        if(target === "dashboard"){
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }else if(target === "list"){
+          document.querySelector(".table-wrap").scrollIntoView({ behavior: "smooth", block: "start" });
+        }else if(target === "calendar"){
+          document.getElementById("calendarGrid").scrollIntoView({ behavior: "smooth", block: "start" });
+        }else if(target === "income"){
+          document.getElementById("monthlyIncome").scrollIntoView({ behavior: "smooth", block: "center" });
+        }else if(target === "stats"){
+          document.getElementById("statsCards").scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+
+    window.editItem = editItem;
+    window.deleteItem = deleteItem;
+    window.duplicateItem = duplicateItem;
+
+    function init(){
+      loadTheme();
+      loadData();
+      const dateText = new Intl.DateTimeFormat("ko-KR", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        weekday: "long"
+      }).format(today);
+      els.todayText.textContent = `오늘 날짜: ${dateText}`;
+      render();
+    }
+
+    init();
+  </script>
+</body>
+</html>
